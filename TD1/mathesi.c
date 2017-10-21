@@ -36,13 +36,16 @@ void exo1dot3(unsigned int number, bool showPower) {
     unsigned int currentNumber = number;
     unsigned int currentDivider = 2;
     printf("%d = ",number);
-    while (currentDivider < currentNumber) {
-        if (exo1dot1(currentDivider)) {
+    while (currentDivider <= currentNumber) {
+        if (exo1dot1(currentDivider) && currentNumber%currentDivider == 0) {
             printf("%d*",currentDivider);
             currentNumber /= currentDivider;
-// TODO: pas fini!
         }
         else ++currentDivider;
 
     }
+}
+
+unsigned exo1dot4(unsigned a, unsigned b) {
+    // TODO: demander aide pour division euclidienne recursive exo 1.4
 }

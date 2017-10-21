@@ -12,4 +12,6 @@ void exo1dot2(unsigned int from, unsigned int to);
 
 void exo1dot3(unsigned int number, bool showPower);
 
+unsigned exo1dot4(unsigned a, unsigned b);
+
 #endif // MATHESI_H
