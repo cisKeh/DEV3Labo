@@ -48,8 +48,12 @@ int main(int argc, char *argv[])
     removeTailDLL(nodeList);
     printDLL(nodeList);
     printf("====================================\n");
-    printf("insert node after head->next (value:%d)\n",insertAfterDLL(nodeList, nodeList->head,18)->value);
+    printf("insert node after head (value:%d)\n",insertAfterDLL(nodeList, nodeList->head,18)->value);
     printDLL(nodeList);
+    printf("====================================\n");
+    printf("insert node before tail (value:%d)\n",insertBeforeDLL(nodeList, nodeList->tail,23)->value);
+    printDLL(nodeList);
+
 
 
 

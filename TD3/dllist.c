@@ -108,7 +108,6 @@ struct DLNode* insertAfterDLL(struct DLList* pDLL,
                               value_t newValue){
     struct DLNode* newNode = newDLN(newValue);
     struct DLNode* current = pDLN;
-    /*ISSUE: line below change tail's value and last head's next with same value than newValue parameter*/
     if (errno == EDLNMEMORYFAIL) errno = EDLLMEMORYFAIL;
     else{
         bool setted = false;
@@ -124,6 +123,31 @@ struct DLNode* insertAfterDLL(struct DLList* pDLL,
                 setted = true;
             }
             current = current->next;
+        }
+    }
+    return current;
+}
+
+struct DLNode* insertBeforeDLL(struct DLList *pDLL,
+                               struct  DLNode *pDLN,
+                               value_t newValue){
+    struct DLNode* newNode = newDLN(newValue);
+    struct DLNode* current = pDLN;
+    if (errno == EDLNMEMORYFAIL) errno = EDLLMEMORYFAIL;
+    else{
+        bool setted = false;
+        current = pDLL->tail;
+        while(current != pDLL->head && !setted){
+            if(current == pDLN){
+                newNode = newDLN(newValue);
+                if(current == pDLL->head) pDLL->head = newNode;
+                newNode->next = current;
+                newNode->previous = current->previous;
+                current->previous->next = newNode;
+                current->previous = newNode;
+                setted = true;
+            }
+            current = current->previous;
         }
     }
     return current;
