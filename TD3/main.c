@@ -53,8 +53,16 @@ int main(int argc, char *argv[])
     printf("====================================\n");
     printf("insert node before tail (value:%d)\n",insertBeforeDLL(nodeList, nodeList->tail,23)->value);
     printDLL(nodeList);
+    printf("====================================\n");
+    printf("clear list\n");
+    clearDLL(nodeList);
+    printDLL(nodeList);
 
 
+
+    /* TODO: Demander au professeur la difference entre "rien ne se passe" et
+     * "le comportement de la fonction est indéterminé" (CF: fct removeDLL)*/
+    /* TODO: non compréhension énoncé de removeDLL */
 
 
 

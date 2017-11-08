@@ -12,11 +12,21 @@ struct DLList* newDLL(){
 }
 
 void deleteDLL(struct DLList ** adpDLL){
-
+    /*TODO: "La destruction de la liste implique la destruction de tous ses éléments."
+     * Est-ce une affirmation ou doit-on supprimer chaque élément 1 par 1 ?*/
 }
 
 void clearDLL(struct DLList * pDLL){
-
+    struct DLNode* current = pDLL->head;
+    struct DLNode* toDelete = current;
+    while(current != pDLL->tail){
+        current = current->next;
+        deleteDLL(&toDelete);
+        toDelete = current;
+    }
+    deleteDLL(&toDelete);
+    pDLL->head = NULL;
+    pDLL->tail = NULL;
 }
 
 struct DLNode * getHeadDLL(const struct DLList *pDLL){
@@ -153,18 +163,43 @@ struct DLNode* insertBeforeDLL(struct DLList *pDLL,
     return current;
 }
 
-void printDLL(const struct DLList *pDLL){
-    struct DLNode* current = pDLL->head;
-    int i = 0;
-    while(current != pDLL->tail){
-        printf("N°%d value: %d\n",i,current->value);
-        current = current->next;
-        ++i;
+
+struct DLNode* removeDLL(struct DLList* pDLL, struct DLNode * pDLN){
+    if (pDLL != NULL && pDLN != NULL){
+        struct DLNode* current = pDLL->head;
+        while(current != pDLN) current = current->next;
+        if(pDLN == pDLL->head ) pDLL->head = pDLN->next;
+        else if(pDLN == pDLL->tail ) pDLL->tail = pDLN->previous;
+        /*TODO: is pDLN part of pDLL or can they have a same value ?
+         * Do we test by the address of each or with value ?*/
+
     }
-    printf("N°%d value: %d\n",i,current->value);
-    printf("size of nodeList:\t%lu\n",getSizeDLL(pDLL));
-    printf("get head value:\t%d\n",getHeadValueDLL(pDLL));
-    printf("get tail value:\t%d\n",getTailValueDLL(pDLL));
+    else if(pDLL != NULL && pDLN == NULL){
+
+    }
+    else if(pDLL == NULL && pDLN != NULL){
+
+    }
+    else{
+
+    }
+}
+
+void printDLL(const struct DLList *pDLL){
+    if(pDLL->head != NULL){
+        struct DLNode* current = pDLL->head;
+        int i = 0;
+        while(current != pDLL->tail){
+            printf("N°%d value: %d\n",i,current->value);
+            current = current->next;
+            ++i;
+        }
+        printf("N°%d value: %d\n",i,current->value);
+        printf("size of nodeList:\t%lu\n",getSizeDLL(pDLL));
+        printf("get head value:\t%d\n",getHeadValueDLL(pDLL));
+        printf("get tail value:\t%d\n",getTailValueDLL(pDLL));
+    }
+    else printf("********The list is empty*****\n");
 }
 
 
