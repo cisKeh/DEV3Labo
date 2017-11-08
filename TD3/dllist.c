@@ -69,9 +69,10 @@ struct DLNode* removeHeadDLL(struct DLList *pDLL){
     if(isEmptyDLL(pDLL)) errno = EDLLEMPTY;
     else{
         pDLL->head = pDLL->head->next;
-        deleteDLN(pDLL->head->previous);
+        deleteDLN(&pDLL->head->previous);
         pDLL->head->previous = NULL;
     }
+    return (isEmptyDLL(pDLL)? NULL : pDLL->head);
 }
 
 struct DLNode* insertTailDLL(struct DLList *pDLL, value_t value){
@@ -95,9 +96,10 @@ struct DLNode* removeTailDLL(struct DLList *pDLL){
     if(isEmptyDLL(pDLL)) errno = EDLLEMPTY;
     else{
         pDLL->tail = pDLL->tail->previous;
-        deleteDLN(pDLL->tail->next);
+        deleteDLN(&pDLL->tail->next);
         pDLL->tail->next = NULL;
     }
+    return (isEmptyDLL(pDLL)? NULL : pDLL->tail);
 }
 
 
@@ -105,11 +107,12 @@ struct DLNode* insertAfterDLL(struct DLList* pDLL,
                               struct DLNode* pDLN,
                               value_t newValue){
     struct DLNode* newNode = newDLN(newValue);
+    struct DLNode* current = pDLN;
     /*ISSUE: line below change tail's value and last head's next with same value than newValue parameter*/
     if (errno == EDLNMEMORYFAIL) errno = EDLLMEMORYFAIL;
     else{
         bool setted = false;
-        struct DLNode* current = pDLL->head;
+        current = pDLL->head;
         while(current != pDLL->tail && !setted){
             if(current == pDLN){
                 newNode = newDLN(newValue);
@@ -123,6 +126,7 @@ struct DLNode* insertAfterDLL(struct DLList* pDLL,
             current = current->next;
         }
     }
+    return current;
 }
 
 
