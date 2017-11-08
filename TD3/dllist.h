@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdio.h>
 #include "dlnode.h"
 
 enum DLLError
@@ -37,5 +38,5 @@ struct DLNode * pDLN,
 value_t newValue);
 struct DLNode * removeDLL(struct DLList * pDLL,
 struct DLNode * pDLN);
-
+void printDLL(const struct DLList* pDLL);
 #endif // DLLIST_H

@@ -129,4 +129,18 @@ struct DLNode* insertAfterDLL(struct DLList* pDLL,
     return current;
 }
 
+void printDLL(const struct DLList *pDLL){
+    struct DLNode* current = pDLL->head;
+    int i = 0;
+    while(current != pDLL->tail){
+        printf("N°%d value: %d\n",i,current->value);
+        current = current->next;
+        ++i;
+    }
+    printf("N°%d value: %d\n",i,current->value);
+    printf("size of nodeList:\t%lu\n",getSizeDLL(pDLL));
+    printf("get head value:\t%d\n",getHeadValueDLL(pDLL));
+    printf("get tail value:\t%d\n",getTailValueDLL(pDLL));
+}
+
 

@@ -7,9 +7,8 @@ int main(int argc, char *argv[])
 
     /*test DLNode*/
 
-    size_t count = 10;
-    struct DLNode* node = newDLN(14);
-    struct DLNode* current = node;
+//    size_t count = 10;
+//    struct DLNode* node = newDLN(14);
 
 //    while(count > 0){
 //        setNextDLN(current,newDLN(count));
@@ -39,40 +38,18 @@ int main(int argc, char *argv[])
     }
     printf("Is nodeList empty:\t");
     printf(isEmptyDLL(nodeList)? "true\n":"false\n");
-    printf("size of nodeList:\t%d\n",getSizeDLL(nodeList));
-    printf("get head value:\t%d\n",getHeadValueDLL(nodeList));
-    printf("get tail value:\t%d\n",getTailValueDLL(nodeList));
-
-    printf("remove head (value:%d)\t",removeHeadDLL(nodeList)->value);
-    printf("size of nodeList:\t%d\n",getSizeDLL(nodeList));
-    current = nodeList->head;
-    int i = 0;
-    while(current != nodeList->tail){
-        printf("N°%d value: %d\n",i,current->value);
-        current = current->next;
-        ++i;
-    }
-
-    printf("remove tail (value:%d)\t",removeTailDLL(nodeList)->value);
-    printf("size of nodeList:\t%d\n",getSizeDLL(nodeList));
-    current = nodeList->head;
-    i = 0;
-    while(current != nodeList->tail){
-        printf("N°%d value: %d\n",i,current->value);
-        current = current->next;
-        ++i;
-    }
-
-    /*why head->previous has node and tail->next also*/
-    printf("insert node after head->next (value:%d)\t",insertAfterDLL(nodeList, nodeList->head,18)->value);
-    printf("size of nodeList:\t%d\n",getSizeDLL(nodeList));
-    current = nodeList->head;
-    i = 0;
-    while(current != nodeList->tail){
-        printf("N°%d value: %d\n",i,current->value);
-        current = current->next;
-        ++i;
-    }
+    printDLL(nodeList);
+    printf("====================================\n");
+    printf("remove head (value:%d)\n",getHeadValueDLL(nodeList));
+    removeHeadDLL(nodeList);
+    printDLL(nodeList);
+    printf("====================================\n");
+    printf("remove tail (value:%d)\n",getTailValueDLL(nodeList));
+    removeTailDLL(nodeList);
+    printDLL(nodeList);
+    printf("====================================\n");
+    printf("insert node after head->next (value:%d)\n",insertAfterDLL(nodeList, nodeList->head,18)->value);
+    printDLL(nodeList);
 
 
 
