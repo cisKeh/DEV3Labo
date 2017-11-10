@@ -12,8 +12,9 @@ struct DLList* newDLL(){
 }
 
 void deleteDLL(struct DLList ** adpDLL){
-    /*TODO: "La destruction de la liste implique la destruction de tous ses éléments."
-     * Est-ce une affirmation ou doit-on supprimer chaque élément 1 par 1 ?*/
+    clearDLL(*adpDLL);
+    free(*adpDLL);
+    adpDLL = NULL;
 }
 
 void clearDLL(struct DLList * pDLL){
@@ -21,7 +22,7 @@ void clearDLL(struct DLList * pDLL){
     struct DLNode* toDelete = current;
     while(current != pDLL->tail){
         current = current->next;
-        deleteDLL(&toDelete);
+        deleteDLN(&toDelete);
         toDelete = current;
     }
     deleteDLL(&toDelete);
@@ -186,7 +187,10 @@ struct DLNode* removeDLL(struct DLList* pDLL, struct DLNode * pDLN){
 }
 
 void printDLL(const struct DLList *pDLL){
-    if(pDLL->head != NULL){
+    if(pDLL == NULL){
+        printf("list is NULL\n");
+    }
+    else if(pDLL->head != NULL){
         struct DLNode* current = pDLL->head;
         int i = 0;
         while(current != pDLL->tail){

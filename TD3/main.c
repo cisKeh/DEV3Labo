@@ -57,6 +57,12 @@ int main(int argc, char *argv[])
     printf("clear list\n");
     clearDLL(nodeList);
     printDLL(nodeList);
+    printf("====================================\n");
+    printf("delete list\n");
+    deleteDLL(nodeList);
+    printDLL(nodeList);
+
+
 
 
 
