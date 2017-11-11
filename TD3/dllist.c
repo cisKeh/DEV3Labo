@@ -25,7 +25,7 @@ void clearDLL(struct DLList * pDLL){
         deleteDLN(&toDelete);
         toDelete = current;
     }
-    deleteDLL(&toDelete);
+    deleteDLN(&toDelete);
     pDLL->head = NULL;
     pDLL->tail = NULL;
 }
@@ -166,23 +166,32 @@ struct DLNode* insertBeforeDLL(struct DLList *pDLL,
 
 
 struct DLNode* removeDLL(struct DLList* pDLL, struct DLNode * pDLN){
+
     if (pDLL != NULL && pDLN != NULL){
         struct DLNode* current = pDLL->head;
-        while(current != pDLN) current = current->next;
-        if(pDLN == pDLL->head ) pDLL->head = pDLN->next;
-        else if(pDLN == pDLL->tail ) pDLL->tail = pDLN->previous;
-        /*TODO: is pDLN part of pDLL or can they have a same value ?
-         * Do we test by the address of each or with value ?*/
+        while(current != pDLN || current == pDLL->tail) current = current->next;
+        if(pDLN == pDLL->head ) {
+            pDLL->head = pDLN->next;
+            pDLL->head->previous = NULL;
+        }
+        else if(pDLN == pDLL->tail ){
+            pDLL->tail = pDLN->previous;
+            pDLL->tail->next = NULL;
+        }
+        else{
+            current->next->previous = current->previous;
+            current->previous->next = current->next;
+        }
+        deleteDLN(&current);
+        current = NULL;
 
     }
-    else if(pDLL != NULL && pDLN == NULL){
-
+    else if(pDLL == NULL && pDLN == NULL){
+        printf("removeDLL: pDLL and pDLN empty ---> return NULL");
+        return NULL;
     }
-    else if(pDLL == NULL && pDLN != NULL){
-
-    }
-    else{
-
+    else if(pDLL == NULL || (pDLL!= NULL && pDLN == NULL)){
+        printf("removeDLL: pDLL or pDLN empty ---> undeterminated");
     }
 }
 
