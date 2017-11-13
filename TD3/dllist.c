@@ -95,7 +95,7 @@ struct DLNode* insertTailDLL(struct DLList *pDLL, value_t value){
             pDLL->tail = newNode;
         }
         else{
-            newNode->next = pDLL->tail;
+            newNode->previous = pDLL->tail;
             pDLL->tail->next = newNode;
             pDLL->tail = newNode;
         }
@@ -113,7 +113,7 @@ struct DLNode* removeTailDLL(struct DLList *pDLL){
     return (isEmptyDLL(pDLL)? NULL : pDLL->tail);
 }
 
-
+/*WARNING :insertAfterDLL can't be used if there is no DLNode after pDLN*/
 struct DLNode* insertAfterDLL(struct DLList* pDLL,
                               struct DLNode* pDLN,
                               value_t newValue){
@@ -123,7 +123,7 @@ struct DLNode* insertAfterDLL(struct DLList* pDLL,
     else{
         bool setted = false;
         current = pDLL->head;
-        while(current != pDLL->tail && !setted){
+        while(current != NULL && !setted){
             if(current == pDLN){
                 newNode = newDLN(newValue);
                 if(current == pDLL->tail) pDLL->tail = newNode;
@@ -148,7 +148,7 @@ struct DLNode* insertBeforeDLL(struct DLList *pDLL,
     else{
         bool setted = false;
         current = pDLL->tail;
-        while(current != pDLL->head && !setted){
+        while(current != NULL && !setted){
             if(current == pDLN){
                 newNode = newDLN(newValue);
                 if(current == pDLL->head) pDLL->head = newNode;
@@ -169,7 +169,7 @@ struct DLNode* removeDLL(struct DLList* pDLL, struct DLNode * pDLN){
 
     if (pDLL != NULL && pDLN != NULL){
         struct DLNode* current = pDLL->head;
-        while(current != pDLN || current == pDLL->tail) current = current->next;
+        while(current != pDLN || current == NULL) current = current->next;
         if(pDLN == pDLL->head ) {
             pDLL->head = pDLN->next;
             pDLL->head->previous = NULL;

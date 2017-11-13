@@ -1,4 +1,4 @@
-#include "dllist.h"
+#include "dllist_utility.h"
 
 
 int main(int argc, char *argv[])
@@ -61,6 +61,38 @@ int main(int argc, char *argv[])
     printf("remove previous tail element(value:%d)\n",nodeList->tail->previous->value);
     removeDLL(nodeList, nodeList->tail->previous);
     printDLL(nodeList);
+
+
+
+
+    /*test DLList_utility*/
+    size_t* size;
+    value_t* firstElem;
+    struct DLList* reversed;
+    printf("====================================\n");
+    printf("to_arrayDLL()\n");
+    size = malloc(sizeof(size_t));
+    firstElem = to_arrayDLL(size,nodeList);
+    printArray(size, firstElem);
+    printf("====================================\n");
+    printf("to_array_reverseDLL()\n");
+    size = malloc(sizeof(size_t));
+    firstElem = to_array_reverseDLL(size,nodeList);
+    printArray(size, firstElem);
+    printf("====================================\n");
+    printf("reverseDLL()\n");
+    reversed = reverseDLL(nodeList);
+    printDLL(reversed);
+    //TODO: doesnt work
+
+
+
+
+
+
+
+
+
     printf("====================================\n");
     printf("clear list\n");
     clearDLL(nodeList);
@@ -68,7 +100,13 @@ int main(int argc, char *argv[])
     printf("====================================\n");
     printf("delete list\n");
     deleteDLL(&nodeList);
-
+    printf("====================================\n");
+    printf("clear reversedlist\n");
+    clearDLL(reversed);
+    printDLL(reversed);
+    printf("====================================\n");
+    printf("delete reverselist\n");
+    deleteDLL(&reversed);
 
     return 0;
 }
