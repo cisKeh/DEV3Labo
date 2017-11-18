@@ -83,15 +83,6 @@ int main(int argc, char *argv[])
     printf("reverseDLL()\n");
     reversed = reverseDLL(nodeList);
     printDLL(reversed);
-    //TODO: doesnt work
-
-
-
-
-
-
-
-
 
     printf("====================================\n");
     printf("clear list\n");
